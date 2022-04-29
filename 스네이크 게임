@@ -19,7 +19,7 @@ function setup() {
 function draw() {
   background(51);
   scoreboard();
-  if (s.eat(food)) { //뱀이 먹이를 먹엇다면 벅이 생성
+  if (s.eat(food)) { //뱀이 먹이를 먹엇다면 먹이 생성
     pickLocation();
   }
   s.death(); //뱀 죽음 확인

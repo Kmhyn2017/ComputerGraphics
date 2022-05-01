@@ -38,8 +38,8 @@
     }
     this.tail[this.total-1] = createVector(this.x, this.y); // 머리와 가장 가까운 꼬리 업데이트
     // 이동한 만큼 머리 이동
-    this.x = this.x + this.xspeed*scl;
-    this.y = this.y + this.yspeed*scl;
+    this.x = this.x + this.xspeed*scl; // 뱀의 속도
+    this.y = this.y + this.yspeed*scl; // 뱀의 속도
 
     this.x = constrain(this.x, 0, playfield-scl); //뱀 x위치 0~580제한
     this.y = constrain(this.y, 0, playfield-scl); //뱀 y위치 0~580제한
@@ -57,3 +57,4 @@
     rect(this.x, this.y, scl, scl); //뱀 x, y좌표 사각형
   }
 }
+//뱀 나타내기 

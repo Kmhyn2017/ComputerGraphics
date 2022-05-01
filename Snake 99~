@@ -1,0 +1,59 @@
+////////////////////////////////////////////////////////////////////////////
+  this.eat = function(pos) { // 뱀 먹이 함수
+    var d = dist(this.x, this.y, pos.x, pos.y); // 뱀과 먹이 사이 거리 d값
+    if (d < 1) { // 뱀이 먹이를 먹엇으면 
+      this.total++; //뱀 꼬리 추가 +1 
+      this.score++; // 점수 +1
+      text(this.score, 70, 625); // 점수 표시
+      if (this.score > this.highscore) { //점수가 최고점수보다 높으면
+        this.highscore = this.score; // 최고 점수 업데이트
+      }
+      text(this.highscore, 540, 625); // 최고 점수 표시
+      return true; //먹엇으면 true
+    } else {
+      return false; // 안먹엇으면 false
+    }
+  }
+  //뱀이 먹이를 먹엇을때, 꼬리가 추가되고 점수가 올라가는 함수 구현
+///////////////////////////////////////////////////////////////////////////
+  this.death = function() { //뱀이 죽었는지 확인 함수
+    for (var i = 0; i < this.tail.length; i++) { // i는 뱀의 꼬리 길이 까지 반복
+      var pos = this.tail[i]; //꼬리 pos에 정의
+      var d = dist(this.x, this.y, pos.x, pos.y); // 뱀과  꼬리 사이 거리 d값
+      if (d < 1) { //머리가 꼬리 벽에 닿앗을시 점수와 꼬리 초기화
+        this.total = 0; //총 점수 초기화
+        this.score = 0; // 초기엔 1인데 죽으면 0으로 세팅해둠
+        this.tail = [];
+      }
+    }
+  }
+  //뱀이 꼬리 벽에 닿을 시 점수 초기화
+////////////////////////////////////////////////////////////////////////////
+  this.update = function(){ // 뱀이동 함수
+    if (this.total === this.tail.length) { // 뱀의 길이와 꼬리 길이가 같을 시
+      for (var i = 0; i < this.tail.length-1; i++) {
+        this.tail[i] = this.tail[i+1]; // 배열 인덱스(백터)를 왼쪽으로 한칸식 이동
+    }
+
+    }
+    this.tail[this.total-1] = createVector(this.x, this.y); // 머리와 가장 가까운 꼬리 업데이트
+    // 이동한 만큼 머리 이동
+    this.x = this.x + this.xspeed*scl;
+    this.y = this.y + this.yspeed*scl;
+
+    this.x = constrain(this.x, 0, playfield-scl); //뱀 x위치 0~580제한
+    this.y = constrain(this.y, 0, playfield-scl); //뱀 y위치 0~580제한
+
+
+  }
+  // 뱀 이동을 수시로 업데이트 시키면서 움직임
+/////////////////////////////////////////////////////////////////////////////  
+  this.show = function(){ // 뱀 출력 함수
+    fill(255);
+    for (var i = 0; i < this.tail.length; i++) {
+        rect(this.tail[i].x, this.tail[i].y, scl, scl); // 뱀 길이x, y좌표 사각형 
+    }
+
+    rect(this.x, this.y, scl, scl); //뱀 x, y좌표 사각형
+  }
+}

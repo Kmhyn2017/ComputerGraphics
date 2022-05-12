@@ -1,41 +1,41 @@
-let img, parts;
+let img, parts; // 이미지와 파트 정의
 let options = {withLandmarks: true, withDescriptors: false};
 
 function preload() {
-  img = loadImage('ok.jpg');
+  img = loadImage('ok.jpg'); // 파일 업로드
 }
 
 function setup() {
-  createCanvas(img.width*2, img.height);
-  faceapi = ml5.faceApi(options, modelReady);
+  createCanvas(img.width*2, img.height); 
+  faceapi = ml5.faceApi(options, modelReady); // ml5.faceApi(사람의 얼굴을 그려주는 API이다.)
   background(255);
   image(img, img.width, 0);    
 }
 
 function modelReady() {
-  faceapi.detectSingle(img, gotResults);
+  faceapi.detectSingle(img, gotResults); // 영상을 가져와서 가져다 쓴다.
 }
 
-function gotResults(err, results) {
+function gotResults(err, results) { // result를 가져돠서 err면 리턴, 맞으면, part속에 넣는다.
   if (err) {
     console.error(err);
     return;
   }
   console.log(results);
-  parts = results.parts;
+  parts = results.parts; // 결과를 part속에 넣는다.
   noFill();
   stroke(0, 0, 255);
   strokeWeight(3);
   drawFace();
 }
 
-function drawFace() {
+function drawFace() { // 얼굴 그리는 함수
   stroke(255, 0, 255);
 
   //입술그리기
   beginShape();
-  for(let i=0; i<parts.mouth.length; i++){
-    vertex(parts.mouth[i]._x, parts.mouth[i]._y);
+  for(let i=0; i<parts.mouth.length; i++){ //입의 길이 만큼 반복
+    vertex(parts.mouth[i]._x, parts.mouth[i]._y); // 점 찍기
   }
   vertex(parts.mouth[0]._x, parts.mouth[0]._y);
   endShape();

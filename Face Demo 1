@@ -34,11 +34,18 @@ function drawFace() {
   stroke(255, 0, 255);
 
   //입술그리기
-  stroke(255,0,0);
+  stroke(255,51,153);
   beginShape();
-  for(let i=0; i<parts.mouth.length; i++){
+  for(let i=0; i<13; i++){
     vertex(parts.mouth[i]._x, parts.mouth[i]._y);
-    //fill(255,0,0);
+    fill(255,0,0);
+  }
+  vertex(parts.mouth[0]._x, parts.mouth[0]._y);
+  endShape();
+  beginShape();
+  for(let i=12; i<parts.mouth.length; i++){
+    vertex(parts.mouth[i]._x, parts.mouth[i]._y);
+    fill(255);
   }
   vertex(parts.mouth[0]._x, parts.mouth[0]._y);
   endShape();
@@ -54,7 +61,7 @@ function drawFace() {
   endShape();
 
   //눈 그리기
-  fill(201,100,25);
+  fill(184,223,248);
   stroke(0,0,255);
   beginShape();
   for(let i=0; i<parts.leftEye.length; i++){

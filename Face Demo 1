@@ -45,7 +45,7 @@ function drawFace() {
   
 
   //코 그리기   
-  noFill();
+  fill(255,127,0);
   stroke(255,0,255);
   beginShape();
   for(let i=0; i<parts.nose.length; i++){
@@ -54,7 +54,7 @@ function drawFace() {
   endShape();
 
   //눈 그리기
-  //fill(100);
+  fill(255,0,255);
   stroke(0,0,255);
   beginShape();
   for(let i=0; i<parts.leftEye.length; i++){
